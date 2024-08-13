@@ -1,0 +1,67 @@
+/* static/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #057b0f;
+}
+
+.game-container {
+    text-align: center;
+}
+
+.clickable-button {
+    width: 150px; /* Ajuste o tamanho conforme necessário */
+    height: 150px;
+    background-image: url('/static/turtle.png');
+    background-size: cover;
+    border: none; /* Remove a borda padrão */
+    cursor: pointer;
+    padding: 0; /* Remove o padding padrão */
+    font-size: 0; /* Remove qualquer texto visível */
+    outline: none; /* Remove a borda de foco ao clicar */
+    background-color: #057b0f;
+}
+
+.clickable-button:active {
+    transform: scale(0.95); /* Adiciona um efeito ao clicar */
+}
+
+.rewards, .items {
+    margin-top: 20px;
+}
+#passive-reward, #total-rewards, #armor-forges, #training-centers, #click-reward, #hard-shells, #hammer-houses {
+    font-weight: bold;
+}
+.buy-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+/* Estilo para o texto flutuante */
+.float-text {
+    position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+    color: yellow;
+    pointer-events: none; /* Desabilita interações com o texto flutuante */
+    animation: floatUp 1s ease-out forwards; /* Animação de flutuar para cima */
+}
+
+/* Animação para o texto flutuante */
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-90px); /* O texto se move 50px para cima */
+    }
+}
+
