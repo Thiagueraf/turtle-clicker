@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clicker Game</title>
+    <title>Turtle Game</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="static/armored-turtle.png" type="image/png">
 </head>
 <body>
     <div class="game-container">
@@ -18,8 +19,11 @@
                 
             </div>
         </div>
-        <p>Moedas: <span id="coins">0</span></p>
+        <!-- <h1>Turtle Clicker </h1> -->
+        <br><p>Moedas: <span id="coins">0</span></p>
         <p>Tartarugas de Armadura treinadas: <span id="total-rewards">0</span></p>
+        <p>Gemas: <span id="gems">0</span></p><br>
+        <div class="notification-container" id="notification-container"></div>      
         <div class="right-menu">
             <h2>Itens para Comprar</h2>
             <button id="buy-training-center" class="buy-button">
@@ -28,8 +32,8 @@
                 <p>Comprados: <span id="training-centers">0</span></p>
             </button>
             <button id="buy-armor-forge" class="buy-button">
-                Comprar Forja de Armadura (Custo: <span id="armor-cost">50</span>)
-                <p>Descricao: Aumenta o ganho por clique em 1.</p>
+                Comprar Forja de Armadura (Custo: <span id="armor-cost">80</span>)
+                <p>Descricao: Aumenta o ganho por clique em 3.</p>
                 <p>Compradas: <span id="armor-forges">0</span></p>
             </button>
             <button id="buy-hard-shell-house" class="buy-button">
@@ -38,8 +42,8 @@
                 <p>Compradas: <span id="hard-shells">0</span></p>
             </button>
             <button id="buy-hammer-house" class="buy-button">
-                Comprar Casa Do Martelo (Custo: <span id="hammer-cost">180</span>)
-                <p>Descricao: Aumenta o ganho por clique em 3.</p>
+                Comprar Casa Do Martelo (Custo: <span id="hammer-cost">200</span>)
+                <p>Descricao: Aumenta o ganho por clique em 5.</p>
                 <p>Compradas: <span id="hammer-houses">0</span></p>
             </button>
             <button id="buy-research-center" class="buy-button">

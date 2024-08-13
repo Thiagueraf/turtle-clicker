@@ -1,9 +1,121 @@
 // static/script.js
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Configuração inicial das conquistas
+    const achievements = {
+        "ninja": {
+            name: "As Ninjas",
+            reward: 0.2,
+            criteria: () => totalRewards >= 4,
+            achieved: false,
+        },
+        "training-camp": {
+            name: "Quartel de Treinos",
+            reward: 0.4,
+            criteria: () => trainingCentersBought >= 10,
+            achieved: false,
+        },
+        "master-clicker": {
+            name: "Master Clicker",
+            reward: 0.5,
+            criteria: () => totalClicks >= 100, // Adicione totalClicks para rastrear o total de cliques
+            achieved: false,
+        },
+        "armor-veteran": {
+            name: "Veterano de Armadura",
+            reward: 0.3,
+            criteria: () => armorForgesBought >= 15,
+            achieved: false,
+        },
+        "fortress-builder": {
+            name: "Construtor de Fortalezas",
+            reward: 0.4,
+            criteria: () => hardShellsBought >= 10,
+            achieved: false,
+        },
+        "tools-expert": {
+            name: "Especialista em Ferramentas",
+            reward: 0.6,
+            criteria: () => hammerHousesBought >= 20,
+            achieved: false,
+        },
+        "turtle-magnate": {
+            name: "O Magnata das Tartarugas",
+            reward: 0.5,
+            criteria: () => totalRewards >= 150, // Supondo que tartarugas treinadas é representado por trainingCentersBought
+            achieved: false,
+        },
+        "research-pioneer": {
+            name: "Pioneiro da Pesquisa",
+            reward: 0.7,
+            criteria: () => researchCentersBought >= 5, // Adicione researchCentersBought para rastrear o Centro de Pesquisa
+            achieved: false,
+        },
+        "library-guru": {
+            name: "Guru da Biblioteca",
+            reward: 0.8,
+            criteria: () => enchantedLibrariesBought >= 3, // Adicione enchantedLibrariesBought para rastrear a Biblioteca Encantada
+            achieved: false,
+        },
+        "supreme-forger": {
+            name: "Forjador Supremo",
+            reward: 1.0,
+            criteria: () => diamondFurnacesBought >= 5, // Adicione diamondFurnacesBought para rastrear o Forno de Diamante
+            achieved: false,
+        },
+        "item-collector": {
+            name: "Colecionador de Itens",
+            reward: 0.6,
+            criteria: () => totalItemsBought === totalAvailableItems, // Adicione totalItemsBought e totalAvailableItems para rastrear todos os itens
+            achieved: false,
+        },
+        "training-defender": {
+            name: "Defensor dos Treinos",
+            reward: 0.3,
+            criteria: () => trainingCentersBought >= 20, // Adicione trainingCentersBought para rastrear o treinamento realizado
+            achieved: false,
+        }
+    };
+    const notificationContainer = document.getElementById('notification-container');
+
+// Função para verificar conquistas
+function checkAchievements() {
+    for (const key in achievements) {
+        const achievement = achievements[key];
+        if (!achievement.achieved && achievement.criteria()) {
+            achievement.achieved = true;
+            displayNotification(achievement);
+            // Adicione as gemas ao total de gemas
+            gems += achievement.reward;
+            updateGemsDisplay();
+        }
+    }
+}
+
+// Função para exibir a notificação de conquista
+function displayNotification(achievement) {
+    const notification = document.createElement('div');
+    notification.className = 'notification show';
+    notification.textContent = `Conquista Desbloqueada: ${achievement.name}! Recompensa: ${achievement.reward} Gemas.`;
+    notificationContainer.appendChild(notification);
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 500); // Remove a notificação após o efeito de fade-out
+    }, 3000);
+}
+
+// Atualizar o total de gemas e o display
+let gems = 0;
+
+function updateGemsDisplay() {
+    gemsDisplay.textContent = gems;
+}
     let coins = 0;
     let passiveRewardRate = 0;
     let totalRewards = 0;
+    let totalClicks = 0;
+    let totalItemsBought = 0;
     let clickRewardValue = 1;
     let trainingCentersBought = 0;
     let armorForgesBought = 0;
@@ -12,7 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let researchCentersBought = 0;
     let enchantedLibrariesBought = 0;
     let diamondFurnacesBought = 0;
-
+    let totalAvailableItems = 4;
+    
     const coinsDisplay = document.getElementById('coins');
     const clickRewardDisplay = document.getElementById('click-reward');
     const passiveRewardDisplay = document.getElementById('passive-reward');
@@ -39,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const buyResearchCenterButton = document.getElementById('buy-research-center');
     const buyLibraryButton = document.getElementById('buy-enchanted-library');
     const buyFurnaceButton = document.getElementById('buy-diamond-furnace');
-
+    const gemsDisplay = document.getElementById('gems');
     // Atualizar a exibição das moedas
     function updateCoinsDisplay() {
         coinsDisplay.textContent = coins;
@@ -104,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         totalRewards += clickRewardValue;
         updateCoinsDisplay();
         updateTotalRewardsDisplay();
+        checkAchievements();
 
         // Pega a posição do clique
         const rect = clickableButton.getBoundingClientRect();
@@ -121,10 +235,12 @@ document.addEventListener('DOMContentLoaded', () => {
             coins -= trainingCost;
             passiveRewardRate++;
             trainingCentersBought++;
+            totalItemsBought++;
             updateCoinsDisplay();
             updatePassiveRewardDisplay();
             updateTrainingCentersDisplay();
             trainingCostDisplay.textContent = trainingCost * 2; // Aumenta o custo para a próxima compra
+            checkAchievements();
         } else {
             alert('Você não tem moedas suficientes para comprar o Centro de Treinamento!');
         }
@@ -136,11 +252,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (coins >= armorCost) {
             coins -= armorCost;
             armorForgesBought++;
-            clickRewardValue++;
+            totalItemsBought++;
+            clickRewardValue+=3;// Aumento do valor do click
             updateCoinsDisplay();
             updateArmorForgesDisplay();
             updateClickRewardDisplay(); // Atualiza o display do ganho por clique
             armorCostDisplay.textContent = armorCost * 3; // Triplica o custo para a próxima compra
+            checkAchievements();
         } else {
             alert('Você não tem moedas suficientes para comprar a Forja de Armadura!');
         }
@@ -153,10 +271,12 @@ document.addEventListener('DOMContentLoaded', () => {
             coins -= hardShellCost;
             passiveRewardRate += 3;
             hardShellsBought++;
+            totalItemsBought++;
             updateCoinsDisplay();
             updateHardShellsDisplay();
             updatePassiveRewardDisplay(); // Atualiza o display da recompensa passiva
             hardShellCostDisplay.textContent = hardShellCost * 2; // Multiplica o custo por 2 para a próxima compra
+            checkAchievements();
         } else {
             alert('Você não tem moedas suficientes para comprar a Casa do Casco Duro!');
         }
@@ -167,12 +287,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const hammerCost = parseInt(hammerCostDisplay.textContent, 10);
         if (coins >= hammerCost) {
             coins -= hammerCost;
-            clickRewardValue += 3;
+            clickRewardValue += 5;
             hammerHousesBought++;
+            totalItemsBought++;
             updateCoinsDisplay();
             updateHammerHousesDisplay();
             updateClickRewardDisplay(); // Atualiza o display do ganho por clique
             hammerCostDisplay.textContent = hammerCost * 3; // Multiplica o custo por 3 para a próxima compra
+            checkAchievements();
         } else {
             alert('Você não tem moedas suficientes para comprar a Casa Do Martelo!');
         }
@@ -227,10 +349,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (coins >= researchCost) {
             coins -= researchCost;
             researchCentersBought++;
+            totalItemsBought++;
             updateCoinsDisplay();
             updateResearchCentersDisplay();
             applyResearchCenterEffect(); // Aplica o efeito de redução de custo
-            researchCostDisplay.textContent = researchCost * 2; // Aumenta o custo para a próxima compra
+            researchCostDisplay.textContent = researchCost * 5; // Aumenta o custo para a próxima compra
+            checkAchievements();
         } else {
             alert('Você não tem moedas suficientes para comprar o Centro de Pesquisa!');
         }
@@ -242,10 +366,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (coins >= libraryCost) {
             coins -= libraryCost;
             enchantedLibrariesBought++;
+            totalItemsBought++;
             updateCoinsDisplay();
             updateEnchantedLibrariesDisplay();
             applyLibraryEffect(); // Aplica o efeito de aumento de eficiência
-            libraryCostDisplay.textContent = libraryCost * 2; // Aumenta o custo para a próxima compra
+            libraryCostDisplay.textContent = libraryCost * 5; // Aumenta o custo para a próxima compra
+            checkAchievements();
         } else {
             alert('Você não tem moedas suficientes para comprar a Biblioteca Encantada!');
         } // Ao comprar a biblioteca o valor do click não está sendo salvo na visualização
@@ -257,6 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (coins >= furnaceCost) {
             coins -= furnaceCost;
             diamondFurnacesBought++;
+            totalItemsBought++;
             clickRewardValue += 10;
             passiveRewardRate += 10;
             updateCoinsDisplay();
@@ -264,10 +391,12 @@ document.addEventListener('DOMContentLoaded', () => {
             updateClickRewardDisplay();
             updatePassiveRewardDisplay();
             furnaceCostDisplay.textContent = furnaceCost * 2; // Aumenta o custo para a próxima compra
+            checkAchievements();
         } else {
             alert('Você não tem moedas suficientes para comprar o Forno de Diamante!');
         }
     });
+
     // Inicializa o display do ganho por clique e das casas compradas
     updateClickRewardDisplay();
     updateHardShellsDisplay();
@@ -295,4 +424,6 @@ document.addEventListener('DOMContentLoaded', () => {
         floatText.addEventListener('animationend', () => {
             floatText.remove();
         });
+        
     }
+
