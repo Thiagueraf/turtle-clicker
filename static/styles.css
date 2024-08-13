@@ -1,21 +1,43 @@
 /* static/styles.css */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #057b0f;
 }
 
 .game-container {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    height: 80vh;
 }
 
+.left-menu, .right-menu {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.left-menu {
+    justify-content: center;
+    background-color: #057b0f;
+}
+
+.right-menu {
+    overflow-y: auto;
+    background-color: #ffffff;
+}
 .clickable-button {
-    width: 150px; /* Ajuste o tamanho conforme necessário */
-    height: 150px;
+    width: 220px; /* Ajuste o tamanho conforme necessário */
+    height: 230px;
     background-image: url('/static/turtle.png');
     background-size: cover;
     border: none; /* Remove a borda padrão */
@@ -30,18 +52,35 @@ body {
     transform: scale(0.95); /* Adiciona um efeito ao clicar */
 }
 
+
 .rewards, .items {
     margin-top: 20px;
 }
 #passive-reward, #total-rewards, #armor-forges, #training-centers, #click-reward, #hard-shells, #hammer-houses {
     font-weight: bold;
 }
+
 .buy-button {
-    padding: 10px 20px;
-    font-size: 16px;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #107214;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    font-size: 14px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.buy-button:hover {
+    background-color: #6ce472;
 }
 
+.buy-button p {
+    margin: 0;
+    font-size: 12px;
+}
 
 /* Estilo para o texto flutuante */
 .float-text {

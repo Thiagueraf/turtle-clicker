@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para reduzir os custos dos upgrades
     function applyResearchCenterEffect() {
-        const reductionFactor = 0.9;
+        const reductionFactor = 0.6;
         trainingCostDisplay.textContent = Math.floor(parseInt(trainingCostDisplay.textContent, 10) * reductionFactor);
         armorCostDisplay.textContent = Math.floor(parseInt(armorCostDisplay.textContent, 10) * reductionFactor);
         hardShellCostDisplay.textContent = Math.floor(parseInt(hardShellCostDisplay.textContent, 10) * reductionFactor);
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para aumentar a eficiência dos upgrades
     function applyLibraryEffect() {
-        const efficiencyFactor = 1.15;
+        const efficiencyFactor = 1.12;
         clickRewardValue = Math.floor(clickRewardValue * efficiencyFactor);
         passiveRewardRate = Math.floor(passiveRewardRate * efficiencyFactor);
     }
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
             libraryCostDisplay.textContent = libraryCost * 2; // Aumenta o custo para a próxima compra
         } else {
             alert('Você não tem moedas suficientes para comprar a Biblioteca Encantada!');
-        }
+        } // Ao comprar a biblioteca o valor do click não está sendo salvo na visualização
     });
 
     // Evento de clique no botão de compra do Forno de Diamante

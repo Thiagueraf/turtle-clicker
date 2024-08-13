@@ -8,18 +8,23 @@
 </head>
 <body>
     <div class="game-container">
-        <button id="clickable" class="clickable-button">Clique Aqui!</button>
-        <div class="rewards">
-            <p>Moedas: <span id="coins">0</span></p>
-            <p>Ganho por Clique: <span id="click-reward">1</span> moedas</p>
-            <p>Recompensa Passiva: <span id="passive-reward">0</span> por segundo</p>
-            <p>Tartarugas de Armadura treinadas: <span id="total-rewards">0</span></p>
+        <div class="left-menu">
+            <p>Clique na tartaruga</p>
+            <button id="clickable" class="clickable-button">Clique Aqui!</button>
+            <div class="rewards">
+                
+                <p>Recrutamento por Clique: <span id="click-reward">1</span> moedas</p>
+                <p>Recrutamento Passivo: <span id="passive-reward">0</span> por segundo</p>
+                
+            </div>
         </div>
-        <div class="items">
+        <p>Moedas: <span id="coins">0</span></p>
+        <p>Tartarugas de Armadura treinadas: <span id="total-rewards">0</span></p>
+        <div class="right-menu">
             <h2>Itens para Comprar</h2>
             <button id="buy-training-center" class="buy-button">
                 Comprar Centro de Treinamento (Custo: <span id="training-cost">10</span>)
-                <p>Descricao: Aumenta a recompensa passiva em 1 por segundo.</p>
+                <p>Descricao: Aumenta o recrutamento passivo em 1 por segundo.</p>
                 <p>Comprados: <span id="training-centers">0</span></p>
             </button>
             <button id="buy-armor-forge" class="buy-button">
@@ -29,7 +34,7 @@
             </button>
             <button id="buy-hard-shell-house" class="buy-button">
                 Comprar Casa do Casco Duro (Custo: <span id="hard-shell-cost">150</span>)
-                <p>Descricao: Aumenta a recompensa passiva em 3 por segundo.</p>
+                <p>Descricao: Aumenta o recrutamento passivo em 3 por segundo.</p>
                 <p>Compradas: <span id="hard-shells">0</span></p>
             </button>
             <button id="buy-hammer-house" class="buy-button">
@@ -39,17 +44,17 @@
             </button>
             <button id="buy-research-center" class="buy-button">
                 Comprar Centro de Pesquisa (Custo: <span id="research-cost">760</span>)
-                <p>Descricao: Reduz os custos dos proximos upgrades em 10%.</p>
+                <p>Descricao: Reduz os custos dos proximos upgrades em 6%.</p>
                 <p>Comprados: <span id="research-centers">0</span></p>
             </button>
             <button id="buy-enchanted-library" class="buy-button">
                 Comprar Biblioteca Encantada (Custo: <span id="library-cost">1400</span>)
-                <p>Descricao: Aumenta a eficiencia de todos os upgrades em 15%.</p>
+                <p>Descricao: Aumenta a eficiencia de todos os upgrades em 12%.</p>
                 <p>Compradas: <span id="enchanted-libraries">0</span></p>
             </button>
             <button id="buy-diamond-furnace" class="buy-button">
                 Comprar Forno de Diamante (Custo: <span id="furnace-cost">2000</span>)
-                <p>Descricao: Aumenta o valor por clique em 10 moedas e a recompensa passiva em 10 moedas por segundo.</p>
+                <p>Descricao: Aumenta o valor por clique em 10 moedas e o recrutamento passivo em 10 moedas por segundo.</p>
                 <p>Compradas: <span id="diamond-furnaces">0</span></p>
             </button>
         </div>
